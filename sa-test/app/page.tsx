@@ -20,7 +20,7 @@ export default function Home() {
 
         {/* 일반 테스트 액션 - 직접 액션 전달 */}
         <form
-          action={testAction}
+          action={testAction as any}
           className="p-6 rounded-lg border border-gray-700 bg-neutral-900 space-y-4"
         >
           <h2 className="text-xl font-semibold text-white">
