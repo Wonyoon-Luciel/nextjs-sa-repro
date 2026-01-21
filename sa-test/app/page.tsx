@@ -47,11 +47,11 @@ export default function Home() {
 
         {/* 민감 액션 - 인라인이지만 return 포함 */}
         <form
-          action={async (formData: FormData) => {
+          action={(async (formData: FormData) => {
             'use server'
             const userId = formData.get('userId') as string;
             return await sensitiveAction(userId);
-          }}
+          }) as any}
           className="p-6 rounded-lg border border-red-700 bg-red-950/40 space-y-4"
         >
           <h2 className="text-xl font-bold text-red-400">
