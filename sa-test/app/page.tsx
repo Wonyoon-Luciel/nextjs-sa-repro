@@ -18,12 +18,9 @@ export default function Home() {
           </p>
         </div>
 
-        {/* 일반 테스트 액션 */}
+        {/* 일반 테스트 액션 - 직접 액션 전달 */}
         <form
-          action={async (formData: FormData) => {
-            'use server'
-            await testAction(formData)
-          }}
+          action={testAction}
           className="p-6 rounded-lg border border-gray-700 bg-neutral-900 space-y-4"
         >
           <h2 className="text-xl font-semibold text-white">
@@ -48,12 +45,12 @@ export default function Home() {
           </button>
         </form>
 
-        {/* 민감 액션 */}
+        {/* 민감 액션 - 인라인이지만 return 포함 */}
         <form
           action={async (formData: FormData) => {
             'use server'
-            const userId = formData.get('userId') as string
-            await sensitiveAction(userId)
+            const userId = formData.get('userId') as string;
+            return await sensitiveAction(userId);
           }}
           className="p-6 rounded-lg border border-red-700 bg-red-950/40 space-y-4"
         >
@@ -85,7 +82,7 @@ export default function Home() {
           <ol className="list-decimal list-inside space-y-1 text-sm text-yellow-200">
             <li>브라우저 개발자도구(F12)를 엽니다</li>
             <li>Network 탭에서 폼 제출 시 POST 요청을 확인합니다</li>
-            <li>Request Headers에서 <code className="text-yellow-100">next-action</code> 값을 복사합니다</li>
+            <li>Request Headers에서 <code className="text-yellow-100 bg-yellow-900/30 px-1">next-action</code> 값을 복사합니다</li>
           </ol>
         </div>
 
@@ -93,4 +90,3 @@ export default function Home() {
     </main>
   );
 }
-

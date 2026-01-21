@@ -1,15 +1,38 @@
+
 'use server'
 
-// 기본 테스트용 액션
 export async function testAction(formData: FormData) {
-  const data = Object.fromEntries(formData);
-  console.log('[Server Action] Received data:', data);
-  // ⚠️ form action에서는 return 절대 금지
+  const testData = formData.get('testData');
+  
+  console.log('[Server Action] testAction called with:', testData);
+  
+  const result = {
+    success: true,
+    testData: String(testData || ''),
+    timestamp: new Date().toISOString(),
+    environment: process.env.VERCEL === '1' ? 'vercel' : 'local',
+    message: '🚨 CSRF vulnerability confirmed if you see this from external domain!'
+  };
+  
+  console.log('[Server Action] Returning:', result);
+  
+  return result;
 }
 
-// 민감한 작업 시뮬레이션 (권한 상승 등)
 export async function sensitiveAction(userId: string) {
+  'use server'
+  
   console.log('[Sensitive Action] Processing for user:', userId);
-  // ⚠️ 마찬가지로 return 제거
+  
+  const result = {
+    userId: userId,
+    role: 'admin',
+    apiKey: 'sk_test_' + Math.random().toString(36).substring(7),
+    timestamp: new Date().toISOString(),
+    warning: '⚠️ CRITICAL: External domain can execute privileged operations!'
+  };
+  
+  console.log('[Sensitive Action] Returning:', result);
+  
+  return result;
 }
-
