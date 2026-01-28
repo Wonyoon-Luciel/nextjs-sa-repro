@@ -3,8 +3,8 @@ import io
 from datetime import datetime
 
 # ========== 설정 ==========
-VERCEL_URL = "https://nextjs-sa-repro.vercel.app/"
-ACTION_ID = "40165649cccbc7217510261cc075ced37901e76dc0"
+VERCEL_URL = "http://localhost:3000/"
+ACTION_ID = "40c3d20cc8d3bcbf3efcf67c25c6e54c7bec6a809a"
 # ==========================
 
 print("=" * 70)
